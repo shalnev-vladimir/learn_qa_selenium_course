@@ -18,3 +18,5 @@ def test_login(driver):
     driver.find_element_by_name("password").send_keys("admin")
     driver.find_element_by_css_selector(".btn.btn-default").click()
     time.sleep(5)
+
+# git test
