@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 import time
+from selenium.webdriver.support.ui import Select
 
 from selenium.webdriver.common.by import By
 
@@ -25,20 +26,26 @@ def driver(request):
 # stickers = product_card.find_elements_by_css_selector(".sticker")
 # for sticker in stickers:
 
-def test_are_elements_present(driver, *stickers):
-    # driver.get("http://localhost/litecart/")
-    # time.sleep(2)
+def test_are_elements_present(driver):
+    driver.get("http://localhost/litecart/")
+    time.sleep(2)
+    driver.find_element_by_css_selector("#content > ul > li.active > a").click()
+    accountListBox = Select(driver.find_element_by_class_name("sticker"))
+    accountListBox.select_by_index(0)
+
+    print(len(accountListBox.options))
+    return len(driver.find_elements_by_class_name('sticker'))
     # tab1 = driver.find_element_by_css_selector(".active > a").click()
     # product_card = tab1.find_element_by_css_selector("#box-campaign-products a")
     # stickers = product_card.find_elements_by_css_selector(".sticker")
-    return len(driver.find_elements(*stickers)) > 0
+    # return len(driver.find_elements(*args)) > 0
 
 
-driver.get("http://localhost/litecart/")
-time.sleep(2)
-tab1 = driver.find_element_by_css_selector(".active > a").click()
-product_card = tab1.find_element_by_css_selector("#box-campaign-products a")
-stickers = product_card.find_elements_by_css_selector(".sticker")
-test_are_elements_present(driver, By.CSS_SELECTOR, ".sticker")
+# driver.get("http://localhost/litecart/")
+# time.sleep(2)
+# tab1 = driver.find_element_by_css_selector(".active > a").click()
+# product_card = tab1.find_element_by_css_selector("#box-campaign-products a")
+# stickers = product_card.find_elements_by_css_selector(".sticker")
+# test_are_elements_present(driver, By.CSS_SELECTOR, ".sticker")
 
 # By.name
